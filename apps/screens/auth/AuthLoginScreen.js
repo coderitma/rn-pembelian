@@ -1,9 +1,10 @@
 import { Button, Card, TextInput } from "react-native-paper";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import ServiceAuthLogin from "../../services/auth/ServiceAuthLogin";
+import ServiceTokenSave from "../../services/token/ServiceTokenSave";
 
-const AuthLoginScreen = () => {
+const AuthLoginScreen = ({ navigation }) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -13,30 +14,14 @@ const AuthLoginScreen = () => {
     setUser((values) => ({ ...values, [name]: value }));
   };
 
-  const login = async () => {
-    try {
-      let response = await fetch("http://192.168.1.4:4000/users/login", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-
-      let { status } = response;
-      let json = await response.json();
-
-      if (status === 400) {
-        throw await json;
-      }
-
-      await AsyncStorage.setItem("@token", json.token);
-      return json;
-    } catch (error) {
-      console.log(error);
-      Alert.alert("Ups", error.message);
-    }
+  const handleServiceAuthLogin = () => {
+    ServiceAuthLogin(user)
+      .then((response) => {
+        ServiceTokenSave(response.data.token);
+        Alert.alert("Sukses", "Anda berhasil login.");
+        navigation.navigate("ScreenPembelianList");
+      })
+      .catch((error) => {});
   };
 
   return (
@@ -66,7 +51,7 @@ const AuthLoginScreen = () => {
         </Card.Content>
         <Card.Actions>
           <Button
-            onPress={login}
+            onPress={handleServiceAuthLogin}
             style={{ width: "100%" }}
             icon="eye"
             mode="contained">
