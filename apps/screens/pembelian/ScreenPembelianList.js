@@ -7,7 +7,6 @@ import StyleBasicApp from "../../styles/StyleBasicApp";
 import ServiceCoreDateInput from "../../services/core/ServiceCoreDateInput";
 import ServiceCoreCurrency from "../../services/core/ServiceCoreCurrency";
 
-// TODO: add tarik scroll refresh
 const ScreenPembelianList = ({ navigation }) => {
   const [daftarPembelian, setDaftarPembelian] = useState([]);
   const [queryPembelian, setQueryPembelian] = useState({

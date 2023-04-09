@@ -3,6 +3,7 @@ import { View, SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import ServiceAuthCheck from "../../services/auth/ServiceAuthCheck";
+import { useIsFocused } from "@react-navigation/native";
 
 const WidgetCoreLayout = ({
   navigation,
@@ -12,7 +13,7 @@ const WidgetCoreLayout = ({
   actions,
   actionBack,
 }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     ServiceAuthCheck()
@@ -20,7 +21,7 @@ const WidgetCoreLayout = ({
       .catch((error) => {
         navigation.navigate("ScreenAuthLogin");
       });
-  }, []);
+  }, [isFocused]);
 
   return (
     <>

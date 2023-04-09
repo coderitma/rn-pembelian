@@ -16,33 +16,35 @@ import {
   DrawerItemList,
   DrawerItem,
 } from "@react-navigation/drawer";
+import { Divider } from "react-native-paper";
 
 const WidgetCoreMenu = (props) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, marginTop: 80 }}>
       {/*Top Large Image */}
       <Image
         source={{
-          uri: "https://icons.iconarchive.com/icons/iconarchive/incognito-animals/128/Bird-Twitter-Avatar-icon.png",
+          uri: "https://www.iconarchive.com/download/i87032/graphicloads/colorful-long-shadow/Book.256.png",
         }}
         style={styles.sideMenuProfileIcon}
       />
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
+        <Divider style={{ marginTop: 20 }} />
         <DrawerItem
-          label="Visit Us"
-          onPress={() => Linking.openURL("https://aboutreact.com/")}
+          label="My GitHub"
+          onPress={() => Linking.openURL("https://github.com/coderitma")}
         />
         <View style={styles.customItem}>
           <Text
             onPress={() => {
-              Linking.openURL("https://aboutreact.com/");
+              Linking.openURL("https://juaracoding.com/");
             }}>
             Rate Us
           </Text>
           <Image
             source={{
-              uri: "https://icons.iconarchive.com/icons/iconarchive/incognito-animals/128/Bird-Twitter-Avatar-icon.png",
+              uri: "https://www.iconarchive.com/download/i42772/oxygen-icons.org/oxygen/Actions-rating.256.png",
             }}
             style={styles.iconStyle}
           />
@@ -54,7 +56,16 @@ const WidgetCoreMenu = (props) => {
           textAlign: "center",
           color: "grey",
         }}>
-        www.aboutreact.com
+        © YanzenProject, 2023
+      </Text>
+      <Text
+        style={{
+          fontSize: 16,
+          textAlign: "center",
+          color: "grey",
+          marginBottom: 30,
+        }}>
+        Build with love.
       </Text>
     </SafeAreaView>
   );
@@ -65,12 +76,13 @@ const styles = StyleSheet.create({
     resizeMode: "center",
     width: 100,
     height: 100,
-    borderRadius: 100 / 2,
+    borderRadius: 0,
     alignSelf: "center",
+    marginBottom: 100 / 2,
   },
   iconStyle: {
-    width: 15,
-    height: 15,
+    width: 16,
+    height: 16,
     marginHorizontal: 5,
   },
   customItem: {
